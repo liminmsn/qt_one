@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.10.0)
 project(qt_one VERSION 0.1.0 LANGUAGES C CXX)
-
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_AUTOMOC ON)
@@ -35,14 +34,24 @@ target_include_directories(qt_one PRIVATE
     "${CMAKE_SOURCE_DIR}/src"
 )
 
-# Set the produced executable name (can include Unicode and spaces)
-set_target_properties(qt_one PROPERTIES OUTPUT_NAME "编辑器")
-
 target_sources(qt_one PRIVATE
     ${APP_RESOURCES}
 )
 
-if(APPLE)
+if(WIN32)
+    find_program(WINDEPLOYQT_EXECUTABLE
+        NAMES windeployqt
+        HINTS "E:/Qt/6.11.1/msvc2022_64/bin"
+    )
+
+    add_custom_command(TARGET qt_one POST_BUILD
+        COMMAND "${WINDEPLOYQT_EXECUTABLE}"
+                --no-translations
+                "$<TARGET_FILE:qt_one>"
+        COMMENT "Running windeployqt..."
+    )
+    
+elseif(APPLE)
 target_sources(qt_one PRIVATE
     AppIcon.icns
 )
@@ -62,3 +71,7 @@ set_target_properties(qt_one PROPERTIES
     MACOSX_BUNDLE_ICON_FILE AppIcon.icns
 )
 endif()
+
+
+
+set_target_properties(qt_one PROPERTIES OUTPUT_NAME "编辑器")
