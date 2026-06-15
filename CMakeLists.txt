@@ -7,7 +7,11 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+if(WIN32)
+list(APPEND CMAKE_PREFIX_PATH "E:/Qt/6.11.1/msvc2022_64")
+elseif(APPLE)
 list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt")
+endif()
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Gui OpenGL OpenGLWidgets)
 
@@ -34,6 +38,15 @@ target_include_directories(qt_one PRIVATE
 # Set the produced executable name (can include Unicode and spaces)
 set_target_properties(qt_one PROPERTIES OUTPUT_NAME "编辑器")
 
+target_sources(qt_one PRIVATE
+    ${APP_RESOURCES}
+)
+
+if(APPLE)
+target_sources(qt_one PRIVATE
+    AppIcon.icns
+)
+
 qt_add_resources(APP_RESOURCES
     resources.qrc
 )
@@ -43,13 +56,9 @@ set_source_files_properties(
     MACOSX_PACKAGE_LOCATION Resources
 )
 
-target_sources(qt_one PRIVATE
-    ${APP_RESOURCES}
-    AppIcon.icns
-)
-
 # Ensure the target is built as a macOS .app bundle and set its icon
 set_target_properties(qt_one PROPERTIES
     MACOSX_BUNDLE TRUE
     MACOSX_BUNDLE_ICON_FILE AppIcon.icns
 )
+endif()
