@@ -8,7 +8,7 @@ pyinstaller \
   -F \
   --name="crawler" \
   --distpath="$OUTPUT_DIR" \
-  --buildpath="./temp_build" \
+  --workpath="./temp_build"\
   --specpath="." \
   main.py
 
