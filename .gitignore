@@ -1,4 +1,7 @@
 /out
 /build
 /crawler/.venv
+/crawler/temp_build
+/crawler/dist
+/crawler/main.spec
 /.vs
