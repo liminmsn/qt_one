@@ -1,9 +1,15 @@
 #!/bin/bash
-# source .venv/bin/activate
-# 打包输出到 E:\output，临时文件放 temp
-pyinstaller `
---clean `
--F -w `
---distpath="E:\output" `
---workpath="./temp_build" `
-main.py
+# 打包爬虫工具为独立可执行文件
+OUTPUT_DIR="../assets/crawler_tool"
+mkdir -p "$OUTPUT_DIR"
+
+pyinstaller \
+  --clean \
+  -F \
+  --name="crawler" \
+  --distpath="$OUTPUT_DIR" \
+  --buildpath="./temp_build" \
+  --specpath="." \
+  main.py
+
+echo "打包完成！输出位置: $OUTPUT_DIR/crawler"
