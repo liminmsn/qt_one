@@ -1,4 +1,5 @@
 #include "DesktopGirl.h"
+#include "VLayout.h"
 #include <QLabel>
 #include <QMouseEvent>
 #include <QVBoxLayout>
@@ -11,19 +12,10 @@ DesktopGirl::DesktopGirl(QWidget *parent)
                    Qt::WindowMinimizeButtonHint |
                    Qt::WindowCloseButtonHint);
 
-    // setAttribute(Qt::WA_TranslucentBackground);
-    
-    setFixedSize(300, 500);
+    // setAttribute(Qt::WA_TranslucentBackground);   
+    setFixedSize(300, 500);  
 
-    // QLabel *image = new QLabel(this);
-    // image->setPixmap(
-    //     QPixmap(":/assets/girl.jpg")
-    //         .scaled(300, 500,
-    //                 Qt::KeepAspectRatio,
-    //                 Qt::SmoothTransformation));
-    // QVBoxLayout *layout = new QVBoxLayout(this);
-    // layout->addWidget(image);
-    // setLayout(layout);
+    new VLayout(this);
 };
 
 void DesktopGirl::mousePressEvent(QMouseEvent *event)
