@@ -24,6 +24,8 @@ DesktopGirl::DesktopGirl(QWidget *parent) : QWidget(parent)
                    Qt::WindowCloseButtonHint);
 
     setFixedSize(800, 600); 
+    setWindowTitle("网络图片查找");
+
 
     QVBoxLayout *vbox = new QVBoxLayout(this);
     vbox->setContentsMargins(0, 0, 0, 0);
@@ -44,11 +46,11 @@ DesktopGirl::DesktopGirl(QWidget *parent) : QWidget(parent)
     // 3. 绑定完成后，再执行加载
     webView->load(QUrl("http://localhost:5173"));
 
-    // 4. 弹出 DevTools 窗口
-    QWebEngineView *devView = new QWebEngineView();
-    devView->setWindowTitle("Developer Tools");
-    devView->resize(800, 600);
-    devView->setAttribute(Qt::WA_DeleteOnClose);
-    devView->load(QUrl("http://localhost:9999"));
-    devView->show();
+    // // 4. 弹出 DevTools 窗口
+    // QWebEngineView *devView = new QWebEngineView();
+    // devView->setWindowTitle("Developer Tools");
+    // devView->resize(800, 600);
+    // devView->setAttribute(Qt::WA_DeleteOnClose);
+    // devView->load(QUrl("http://localhost:9999"));
+    // devView->show();
 }
