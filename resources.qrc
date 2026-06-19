@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>assets/girl.jpg</file>
+        <file>assets/web/index.html</file>
+        <file>assets/web/assets/index.js</file>
+        <file>assets/web/assets/index.css</file>
     </qresource>
 </RCC>

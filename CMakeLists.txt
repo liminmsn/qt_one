@@ -12,9 +12,15 @@ elseif(APPLE)
 list(APPEND CMAKE_PREFIX_PATH "/opt/homebrew/opt/qt")
 endif()
 
-find_package(Qt6 REQUIRED COMPONENTS Widgets Gui OpenGL OpenGLWidgets)
+find_package(Qt6 REQUIRED COMPONENTS Widgets WebEngineWidgets WebChannel)
 
-file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
+file(GLOB_RECURSE WEB_RESOURCES
+    CONFIGURE_DEPENDS
+    "${CMAKE_SOURCE_DIR}/assets/web/*"
+)
+
+file(GLOB_RECURSE SRC_FILES 
+    CONFIGURE_DEPENDS
     "${CMAKE_SOURCE_DIR}/src/*.cpp"
     "${CMAKE_SOURCE_DIR}/src/*.h"
 )
@@ -22,23 +28,25 @@ file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS
 add_executable(qt_one 
     main.cpp
     ${SRC_FILES}
+    resources.qrc
+    ${WEB_RESOURCES}
 )
 
 target_link_libraries(qt_one PRIVATE
     Qt6::Widgets
-    Qt6::Gui
-    Qt6::Core
+    Qt6::WebEngineWidgets
+    Qt6::WebChannel
 )
 
 target_include_directories(qt_one PRIVATE
     "${CMAKE_SOURCE_DIR}/src"
 )
 
-target_sources(qt_one PRIVATE
-    ${APP_RESOURCES}
-)
-
 if(WIN32)
+    target_sources(qt_one PRIVATE
+        ${APP_RESOURCES}
+    )
+
     find_program(WINDEPLOYQT_EXECUTABLE
         NAMES windeployqt
         HINTS "E:/Qt/6.11.1/msvc2022_64/bin"
@@ -56,9 +64,6 @@ target_sources(qt_one PRIVATE
     AppIcon.icns
 )
 
-qt_add_resources(APP_RESOURCES
-    resources.qrc
-)
 set_source_files_properties(
     AppIcon.icns
     PROPERTIES

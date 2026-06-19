@@ -1,9 +1,13 @@
 #pragma once
+
 #include <QWidget>
+
+class QWebEngineView;
 
 class DesktopGirl : public QWidget
 {
     Q_OBJECT
+
 public:
     explicit DesktopGirl(QWidget *parent = nullptr);
 
@@ -13,4 +17,6 @@ protected:
 
 private:
     QPoint dragPos;
+
+    QWebEngineView *webView;
 };

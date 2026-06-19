@@ -1,8 +1,8 @@
 #include "DesktopGirl.h"
-#include "VLayout.h"
-#include <QLabel>
 #include <QMouseEvent>
 #include <QVBoxLayout>
+#include <QWebEngineView>
+#include <QUrl>
 
 DesktopGirl::DesktopGirl(QWidget *parent)
     : QWidget(parent)
@@ -12,10 +12,15 @@ DesktopGirl::DesktopGirl(QWidget *parent)
                    Qt::WindowMinimizeButtonHint |
                    Qt::WindowCloseButtonHint);
 
-    // setAttribute(Qt::WA_TranslucentBackground);   
-    setFixedSize(300, 500);  
+    setFixedSize(800, 600);
 
-    new VLayout(this);
+    QVBoxLayout *vbox = new QVBoxLayout(this);
+    vbox->setContentsMargins(0, 0, 0, 0);
+
+    webView = new QWebEngineView(this);
+    vbox->addWidget(webView);
+    webView->load(QUrl("http://localhost:5173/"));
+    // webView->load(QUrl("qrc:/assets/web/index.html"));
 };
 
 void DesktopGirl::mousePressEvent(QMouseEvent *event)
