@@ -3,7 +3,8 @@
 
 int main(int argc, char** argv){
     QApplication app(argc,argv);
-    
+    qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "9999");
+
     DesktopGirl girl;
     girl.show();
     
