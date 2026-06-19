@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare module 'qwebchannel' {
   export type QWebChannelTransport = {
     webChannelTransport: any;
